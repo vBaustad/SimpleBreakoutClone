@@ -62,6 +62,10 @@ public class GameManager : MonoBehaviour
         SwitchState(State.INIT);
     }
 
+    public void QuitClicked(){
+        Application.Quit();
+    }
+
     void Start()
     {
         Instance = this;
@@ -151,6 +155,12 @@ public class GameManager : MonoBehaviour
                 }
                 if(_currentLevel != null && _currentLevel.transform.childCount == 0 && !_isSwitchingState){
                     SwitchState(State.LEVELCOMPLETED);
+                }
+                if(Input.GetKeyDown(KeyCode.Escape)){
+                    Balls = 0;
+                    Destroy(_currentBall);
+                    Destroy(_currentLevel);
+                    SwitchState(State.MENU);
                 }
                 break;
             case State.LEVELCOMPLETED:
